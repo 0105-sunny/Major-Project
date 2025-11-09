@@ -1,0 +1,65 @@
+<% layout("/layouts/boilerplate.ejs") %>
+  <!-- Here all the below used row and col in such classes these are the inbuilt bootstrap elements -->
+<body>
+   <div class="row mt-3">
+      <div class="col-8 offset-2"></div>
+      <h3> Create a New Listing</h3>
+      <br> <br>
+      <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
+       
+        <div class="mb-3">
+          <label for="title", class="form-label">Title</label>
+          <input placeholder="Add A catchy  title" name="listing[title]" type="text" class="form-control" required/>
+          <div class="valid-feedback">Title Looks good</div>
+          <div class="invalid-feedback">please enter a Title </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="description", class="form-label">Description</label>
+          <textarea placeholder="enter description" name="listing[description]"  type="text" class="form-control" required></textarea>
+          <div class="invalid-feedback">please enter a short description</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="image", class="form-label">Upload Listing Image</label>
+          <input name="listing[image]"  type="file" class="form-control"/>
+          <div class="invalid-feedback">please enter a vallied image  </div>
+          required
+        </div>
+
+       <div class="row">
+        <div class="mb-3 col-md-4">
+          <label for="Price", class="form-label">Price</label>
+          <input placeholder="1200" name="listing[price]" class="form-control" required/>
+           <div class="invalid-feedback">please enter a vallied price</div>
+        </div>
+
+        <div class="mb-3 col-md-8">
+          <label for="country", class="form-label">Country</label>
+          <input placeholder="INDIA" name="listing[country]"  type="text" class="form-control" required/>
+          <div class="invalid-feedback">please enter The country name</div>
+        </div>
+       </div>
+        <div class="mb-3">
+          <label for="location", class="form-label">Location</label>
+          <input placeholder="Jaipur rajasthan" name="listing[location]" type="text"  class="form-control" required/>
+          <div class="invalid-feedback">please enter the location</div>
+        </div>
+        <button class="btn btn-dark add-btn">Add</button>
+    <br><br>
+    </form>
+   </div>
+  </div>
+</body>
+
+<!-- S11 part
+here required is form validation which instruct the user  that this data is must to enter -->
+
+<!-- imp yaha rerquired hame hae browser par alg alg messge deta hai isliye me
+ bootstrap ki styling ko add kar denge jo already satandarise hota hai sBHI BROWSER KE LIYE -->
+
+ <!-- For custom Bootstrap form validation messages, you’ll need to add the novalidate boolean attribute to your <form>. This disables the browser default feedback tooltips, For custom Bootstrap form validation messages, 
+you’ll need to add the novalidate boolean attribute to your <form>. This disables the browser default feedback tooltips, For custom Bootstrap form validation messages, you’ll need to add the novalidate boolean attribute
+ to your <form>. This disables the browser default feedback 
+tooltips, For custom Bootstrap form validation messages, you’ll need to add the novalidate boolean 
+attribute to your <form>. This disables the browser default feedback tooltips, For custom Bootstrap form validation messages, you’ll need to add the novalidate boolean attribute to your <form>. This disables the browser default feedback tooltips,  -->
