@@ -3,6 +3,7 @@ if (process.env.NODE_ENV !== "production") {
    require('dotenv').config();
 }
 
+const faker = require("@faker-js/faker");
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -10,7 +11,6 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate"); // it helps to create templates and layouts S7
 const session = require('express-session');  // it define or provide a user session 
-const mongoStore = require("connect-mongo");
 const flash  = require("connect-flash"); // it is used flash a pop up message sinlge time 
 const passport  = require("passport");   
 const localStrategy = require("passport-local");
