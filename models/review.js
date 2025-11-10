@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { setMaxParserCache } = require("mysql2");
 const Schema = mongoose.Schema;
 
 const reviewSchema = new Schema({

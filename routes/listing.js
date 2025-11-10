@@ -2,7 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync.js") // S12 async wrap function for error handling
-const Listing = require("../models/listing.js"); // step 2
+// const Listing = require("../models/listing.js"); // step 2
 const {isLoggedIn, isOwner, validateListing} = require("../middleware.js");
 const listingController = require("../controllers/listings.js")
 const multer = require("multer"); // its package used for to read the multipart form data
@@ -20,8 +20,7 @@ router
    //S5 part 2 Create route (we will post the information which is added in the newlisting form)
   .post(
     isLoggedIn,
-    // validateListing,
-    upload.single("listing[image]"),
+    validateListing,
     wrapAsync(listingController.createListing));
 
 // new form route for adding new listing 

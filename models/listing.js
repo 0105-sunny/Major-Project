@@ -1,4 +1,4 @@
-const { NumberModule } = require("@faker-js/faker");
+
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const Review = require ("./review.js");
