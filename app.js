@@ -43,12 +43,12 @@ app.use(express.urlencoded({extended:true})); //used to pasre the data
 const dbUrl = process.env.ATLASDB_URL;
 
 async function main() {
-    await mongoose.connect(dbUrl);
+  await mongoose.connect(dbUrl);
 }
 
 main()
 .then((res) => {
-    console.log("connection successful");
+    console.log("connection successful", res);
 })
 .catch((err) => {
     console.log(err);
