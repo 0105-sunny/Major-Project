@@ -16,7 +16,7 @@ module.exports.renderNewForm = (req, res) => {
 //show route
 module.exports.showListing = async(req, res)=> {
       let {id} = req.params;
-      const listing = await Listing.findById(id)
+      const Listing = await Listing.findById(id)
         .populate({
            path:"reviews",
            populate: {
@@ -29,7 +29,7 @@ module.exports.showListing = async(req, res)=> {
         return res.redirect("/listings");
     };
 
-    res.render("./listings/show.ejs", {listing, showMap:true});
+    res.render("./listings/show.ejs", {Listing, showMap:true});
 };
 
 
