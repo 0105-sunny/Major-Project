@@ -39,6 +39,7 @@ app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 app.use(methodOverride("_method")); //Middleware to override the mathod
 app.use(express.urlencoded({extended:true})); //used to pasre the data
+app.use(express.json());
 
 const dbUrl = process.env.ATLASDB_URL;
 
