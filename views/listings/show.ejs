@@ -2,16 +2,16 @@
 <body>
     <div class="row mt-3">
         <div class="col-8 offset-3">
-             <h3><%=  Listing.title %></h3>
+             <h3><%=  listing.title %></h3>
         </div>
       <div class="card offset-3 col-6 show-card listing-card">
-        <img src="<%=  Listing.image.url %>" class="card-img-top show-img" alt="listing_image">
+        <img src="<%=  listing.image.url %>" class="card-img-top show-img" alt="listing_image">
         <div class="card-body">
-          <p class="card-text"> Owned by <i> <%= Listing.owner.username %> </i></p>
-          <p class="card-text">  <%=  Listing.description %> </p>
-          <p class="card-text"> &#8377;<%=  Listing.price.toLocaleString("en-IN") %> </p>
-          <p class="card-text"> <%=  Listing.location %> </p>
-          <p class="card-text">  <%=  Listing.country %> </p>
+          <p class="card-text"> Owned by <i> <%= listing.owner.username %> </i></p>
+          <p class="card-text">  <%=  listing.description %> </p>
+          <p class="card-text"> &#8377;<%=  listing.price.toLocaleString("en-IN") %> </p>
+          <p class="card-text"> <%=  listing.location %> </p>
+          <p class="card-text">  <%=  listing.country %> </p>
         
         </div>
       </div>
@@ -19,11 +19,11 @@
     </div>
 
     <!-- hiding the buttons for not owned listings -->
-    <% if(currUser && Listing.owner._id.equals(currUser._id)) { %>
+    <% if(currUser && listing.owner._id.equals(currUser._id)) { %>
     <div class="btns">
-        <a href="/listings/<%= Listing._id %>/edit" class="btn btn-dark col-1 offset-3 edit-btn">Edit</a>
+        <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark col-1 offset-3 edit-btn">Edit</a>
     
-        <form method="POST" action="/listings/<%= Listing._id%>?_method=DELETE">
+        <form method="POST" action="/listings/<%= listing._id%>?_method=DELETE">
           <button  class="btn btn-dark offset-3">Delete</button>
         </form>
     </div>
@@ -33,7 +33,7 @@
     <hr>
     <h4> Leave a Review </h4>
   <form 
-    action="/listings/<%= Listing._id%>/reviews" 
+    action="/listings/<%= listing._id%>/reviews" 
     method="post"
     novalidate
     class="needs-validation" 
@@ -77,23 +77,23 @@
         <!-- // basic reviesw before styling -->
         <!-- <h4> All Reviews</h4>
         <ul>
-          <% for (review of Listing.reviews) { %>
+          <% for (review of listing.reviews) { %>
             <li> <%= review.comment %>,  <%= review.rating %> stars </li>
           <% } %>
        </ul> -->
         
         <!-- Reviews after styling -->
-        <% if(Listing.reviews.length >0) { %>
+        <% if(listing.reviews.length >0) { %>
         <div class="row">
           <P> <b> All Reviews </b></P>
-          <% for (review of Listing.reviews) { %>
+          <% for (review of listing.reviews) { %>
             <div class="card col-5 mb-3 ms-3" >
                <div class="card-body">
                  <p class="starability-result card-text" data-rating=<%= review.rating %>></p>
                  <h5 class="card-title"> @<%= review.author.username %></h5>
                  <p class="card-text">  <%= review.comment %> </p>
                 </div>
-                <form class="mb-3" method = "post" action="/listings/<%= Listing._id %>/reviews/<%= review._id %>?_method=DELETE">
+                <form class="mb-3" method = "post" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
                 <!-- // review deleting button -->
                   <button class="btn btn-sm btn-dark" > Delete </button>
                 </form>
@@ -129,7 +129,7 @@
 
   <!-- Pass location from EJS to JS -->
   <script>
-    const listingLocation = "<%= Listing.location %>"; 
+     const listingLocation = "<%= listing.location %>"; 
   </script>
 </div>
 
