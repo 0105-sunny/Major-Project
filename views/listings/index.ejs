@@ -105,15 +105,15 @@
 
 
    <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2">
-     <% for(let listing of allListings) { %>
-     <a href="/listings/<%= listing._id %>" class="listing-link">
+     <% for(let Listing of allListings) { %>
+     <a href="/listings/<%= Listing._id %>" class="listing-link">
        <div class="card col listing-card" >
-        <img src="<%= listing.image.url%>" class="card-img-top" alt="listingimage" style="height:18rem">
+        <img src="<%= Listing.image.url%>" class="card-img-top" alt="listingimage" style="height:18rem">
        <div class= "card-img-overlay"></div>
        <div class="card-body">
         <p class="card-text">
-        <b><%= listing.title %></b> <br>
-         &#8377; <%= listing.price ? listing.price.toLocaleString("en-IN"): "N/A" %> /night
+        <b><%= Listing.title %></b> <br>
+         &#8377; <%= Listing.price ? Listing.price.toLocaleString("en-IN"): "N/A" %> /night
          <i class="tax-info"> &nbsp;&nbsp;+18% GST </i>
         </p>
        </div>
