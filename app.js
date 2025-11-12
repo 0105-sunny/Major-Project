@@ -44,8 +44,19 @@ app.use(express.json());
 const dbUrl = process.env.ATLASDB_URL;
 
 async function main() {
-   await mongoose.connect(dbUrl);
+   try{
+   await mongoose.connect(dbUrl, {
+    useNewUrlParser: true,
+      useUnifiedTopology: true,
+      tls: true,
+      serverSelectionTimeoutMS: 15000
+    });
+    console.log("✅ MongoDB Atlas connection successful!");
+  } catch (err) {
+    console.error("❌ MongoDB connection failed:", err);
+  }
 }
+
 main()
 .then((res) => {
     console.log("connection successful");
