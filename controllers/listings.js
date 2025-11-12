@@ -33,20 +33,40 @@ module.exports.showListing = async(req, res)=> {
 };
 
 
-// create route 
-module.exports.createListing = async(req, res, next) => {
-    // let{title, description, location, country, price, image} = req.body;
-    // S2Listing.insertMany({id, title, description, location,country, price, img})
-    // let S5Listings = req.body.S5listing; // isko ham directly model formate me pass karke ek new instance bana sakte hai 
-    let url = req.file.path;
-    let filename = req.file.filename;
-    const newListings = new Listing(req.body.listing);
-    newListings.owner = req.user._id;
-    newListings.image = {url, filename};
-    await newListings.save();
-    req.flash("success", "new listing created");
-    res.redirect("/listings");
+// // create route 
+// module.exports.createListing = async(req, res, next) => {
+//     // let{title, description, location, country, price, image} = req.body;
+//     // S2Listing.insertMany({id, title, description, location,country, price, img})
+//     // let S5Listings = req.body.S5listing; // isko ham directly model formate me pass karke ek new instance bana sakte hai 
+//     let url = req.file.path;
+//     let filename = req.file.filename;
+//     const newListings = new Listing(req.body.listing);
+//     newListings.owner = req.user._id;
+//     newListings.image = {url, filename};
+//     await newListings.save();
+//     req.flash("success", "new listing created");
+//     res.redirect("/listings");
+// };
+
+module.exports.createListing = async (req, res) => {
+  console.log("📦 req.body =", req.body);
+
+  if (!req.body.listing) {
+    req.flash("error", "Please fill the form properly!");
+    return res.redirect("/listings/new");
+  }
+
+  const newListing = new Listing(req.body.listing);
+
+  if (req.file) {
+    newListing.image = { url: req.file.path, filename: req.file.filename };
+  }
+
+  await newListing.save();
+  req.flash("success", "New listing created!");
+  res.redirect("/listings");
 };
+
    
   // Edit form
 module.exports.renderEditForm = async (req, res) => {
