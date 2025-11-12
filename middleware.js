@@ -35,8 +35,12 @@ module.exports.isOwner = async (req, res, next) => {
     next();
 };
 
-// middleware for listing route
-module.exports.validateListing = (req, res, next) => {
+//middleware for listing route
+module.exports.validateListing = async (req, res, next) => {
+    
+    // await Listing.findByIdAndUpdate(id, {...req.body.listing});
+
+
    if (req.body.listing === undefined && req.body.title) {
     req.body.listing = { ...req.body };
      }
@@ -48,6 +52,22 @@ module.exports.validateListing = (req, res, next) => {
        next(); 
     }
 };
+
+// // Middleware for validating listing data
+// module.exports.validateListing = (req, res, next) => {
+//   const { error } = listingSchema.validate(req.body, { abortEarly: false });
+
+//   if (error) {
+//     // Convert Joi error details to readable message
+//     const msg = error.details.map(el => el.message).join(", ");
+//     console.log("❌ Listing Validation Error:", msg);
+//     // Return a simple response or render error page
+//     return res.status(400).send(`Validation Error: ${msg}`);
+//   } else {
+//     next(); // move to next middleware/controller
+//   }
+// };
+
 
 module.exports.validateReview = (req, res, next) => {
     console.log(req.body);
