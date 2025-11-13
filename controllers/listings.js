@@ -33,15 +33,24 @@ module.exports.showListing = async(req, res)=> {
 };
 
 
-// create route 
-module.exports.createListing = async (req, res, next) => {
+// // create route 
+module.exports.createNewListing = async (req, res, next) => {  
   const newListing = new Listing(req.body.listing);
+  
+  // SAVE IMAGE HERE
+  if (req.file) {
+    newListing.image = {
+      url:req.file.path,
+      filename: req.file.filename
+    }  // Cloudinary URL or local uploads path
+  }
+
   newListing.owner = req.user._id;
   await newListing.save();
   req.flash("success", "new Listing created");
   res.redirect("/listings");
-}
-
+  next();
+};
 
   // Edit form
 module.exports.renderEditForm = async (req, res) => {

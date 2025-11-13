@@ -5,6 +5,8 @@ if (process.env.NODE_ENV !== "production") {
 
 const express = require("express");
 const app = express();
+// app.use(express.json());
+app.use(express.urlencoded({extended:true})); //used to pasre the data 
 const mongoose = require("mongoose");
 const path = require("path");
 const methodOverride = require("method-override");
@@ -32,14 +34,12 @@ app.use((req, res, next) => {
   next();
 });
 
- 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 app.use(methodOverride("_method")); //Middleware to override the mathod
-app.use(express.urlencoded({extended:true})); //used to pasre the data
-app.use(express.json());
+
 
 const dbUrl = process.env.ATLASDB_URL;
 
@@ -51,9 +51,9 @@ async function main() {
       tls: true,
       serverSelectionTimeoutMS: 15000
     });
-    console.log("✅ MongoDB Atlas connection successful!");
+    console.log(" MongoDB Atlas connection successful!");
   } catch (err) {
-    console.error("❌ MongoDB connection failed:", err);
+    console.error(" MongoDB connection failed:", err);
   }
 }
 
@@ -68,6 +68,9 @@ main()
 // app.get("/", (req, res,) => {
 //     res.send("hi i am root");
 // });
+
+
+
 const Store = MongoStore.create ({
   mongoUrl: dbUrl,
   crypto: {

@@ -2,26 +2,26 @@
 const express = require("express");
 const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync.js") // S12 async wrap function for error handling
-// const Listing = require("../models/listing.js"); // step 2
+const Listing = require("../models/listing.js"); // step 2
 const {isLoggedIn, isOwner, validateListing} = require("../middleware.js");
 const listingController = require("../controllers/listings.js")
 const multer = require("multer"); // its package used for to read the multipart form data
-const {storage} = require("../cloudConfig.js")
+const {storage} = require("../cloudConfig.js");
+const { listingSchema } = require("../schema.js");
 const upload = multer({ storage }); // this will save the files(images) in uploads folder
-
-// we are segrigetting the routes 
 
 //cmbine routes at "/" 
 router
   .route("/")
   // Index Route
   .get( wrapAsync(listingController.index))
-
+  
    //S5 part 2 Create route (we will post the information which is added in the newlisting form)
   .post(
     isLoggedIn,
     validateListing,
-    wrapAsync(listingController.createListing));
+    upload.single("listing[image]"),
+    wrapAsync( listingController.createNewListing));
 
 // new form route for adding new listing 
 router.get("/new",isLoggedIn, (listingController.renderNewForm));

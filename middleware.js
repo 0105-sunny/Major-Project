@@ -35,40 +35,7 @@ module.exports.isOwner = async (req, res, next) => {
     next();
 };
 
-//middleware for listing route
-module.exports.validateListing = async (req, res, next) => {
-    
-    // await Listing.findByIdAndUpdate(id, {...req.body.listing});
-
-
-   if (req.body.listing === undefined && req.body.title) {
-    req.body.listing = { ...req.body };
-     }
-    let {error} = listingSchema.validate(req.body); // here it check the data coming to body is in correct format
-    if (error) {  
-    let errMsg = error.details.map((el) => el.message).join(",");
-        throw new ExpressError(400, errMsg);
-    } else {
-       next(); 
-    }
-};
-
-// // Middleware for validating listing data
-// module.exports.validateListing = (req, res, next) => {
-//   const { error } = listingSchema.validate(req.body, { abortEarly: false });
-
-//   if (error) {
-//     // Convert Joi error details to readable message
-//     const msg = error.details.map(el => el.message).join(", ");
-//     console.log("❌ Listing Validation Error:", msg);
-//     // Return a simple response or render error page
-//     return res.status(400).send(`Validation Error: ${msg}`);
-//   } else {
-//     next(); // move to next middleware/controller
-//   }
-// };
-
-
+// middleware gor review validations
 module.exports.validateReview = (req, res, next) => {
     console.log(req.body);
     // Remove unexpected rating field if present
@@ -82,7 +49,18 @@ module.exports.validateReview = (req, res, next) => {
        next(); 
     }
 };
-//middleware for review route
+
+// middleware for listing validations route
+module.exports.validateListing = (req, res, next) => {
+    let { error } = listingSchema.validate(req.body);
+    
+    if(error) {
+        let errMsg = error.details.map((el) => el.message).join(",");
+        throw new ExpressError(400, errMsg);
+    } else {
+        next();
+    }
+};
 
 module.exports.isReviewAuthor = async (req, res, next) => {
      let {reviewId, id} = req.params;
