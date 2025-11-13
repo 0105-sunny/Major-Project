@@ -65,10 +65,6 @@ main()
     console.log(err);
 });
 
-app.get("/", (req, res,) => {
-    res.send("hi i am root");
-});
-
 
 
 const Store = MongoStore.create ({
