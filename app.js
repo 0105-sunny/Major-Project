@@ -124,7 +124,7 @@ app.use("/listings/:id/reviews", reviewsRouter);
 app.use("/", userRouter);
 
 // map coding
-app.get("/geocode", async (req, res) => {
+  app.get("/geocode",async (req, res) => {
   const query = req.query.q;
   if (!query) return res.status(400).json({ error: "Query required" });
 
@@ -163,3 +163,4 @@ app.get("/tiles/:z/:x/:y.png", async (req, res) => {
     res.status(500).send("Tile proxy error");
   }
 });
+
