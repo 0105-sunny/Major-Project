@@ -32,15 +32,16 @@
 
 </head>
 <body>
-    <%- include("../includes/navbar.ejs") %>
+   <div class="content-wrap">
+      <%- include("../includes/navbar.ejs") %>
 
-    <%- include("../includes/flash.ejs") %>
-    <div class="container">
-      <%- body %>
+      <%- include("../includes/flash.ejs") %>
+      <div class="container">
+        <%- body %>
+      </div>
     </div>
- 
     <%- include("../includes/footer.ejs") %>
-  
+    
   <!-- MapTiler SDK JS -->
   <script src="https://cdn.maptiler.com/maptiler-sdk-js/v2.2.0/maptiler-sdk.umd.js"></script>  
   <script
