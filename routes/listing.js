@@ -48,10 +48,4 @@ router
 //S5 part 3 edit route (editing the existing form);
 router.get("/:id/edit",isLoggedIn,isOwner, wrapAsync( listingController.renderEditForm));
 
-
-// map code 
-
-router.get("/tiles/:z/:x/:y.png",(listingController.mapTiles));
-
-
 module.exports = router;

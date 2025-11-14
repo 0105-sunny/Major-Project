@@ -1,4 +1,4 @@
-// ✅ Secure map rendering (no API key here)
+//Secure map rendering (no API key here)
 
 // Local style using proxy tiles
 const style = {
@@ -54,3 +54,4 @@ async function showListingLocation(location) {
 if (typeof listingLocation !== "undefined" && listingLocation.trim() !== "") {
   showListingLocation(listingLocation);
 }
+

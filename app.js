@@ -28,6 +28,8 @@ const fetch = require("node-fetch");
 const MongoStore = require('connect-mongo');
 const MAPTILER_API_KEY = process.env.MAPTILER_API_KEY;
 
+
+
 // maping code 
 app.use((req, res, next) => {
   res.locals.MAPTILER_KEY = process.env.MAPTILER_KEY;
@@ -126,6 +128,7 @@ app.use("/listings/:id/reviews", reviewsRouter);
 // all users route
 app.use("/", userRouter);
 
+// map coding
 app.get("/geocode", async (req, res) => {
   const query = req.query.q;
   if (!query) return res.status(400).json({ error: "Query required" });
@@ -148,4 +151,20 @@ app.use((err, req, res, next) => {
  
 app.listen(8080, () => {  
     console.log("server is listing to port 8080")
+});
+
+app.get("/tiles/:z/:x/:y.png", async (req, res) => {
+  const { z, x, y } = req.params;
+  const tileUrl = `https://api.maptiler.com/maps/streets/256/${z}/${x}/${y}.png?key=${MAPTILER_API_KEY}`;
+
+  try {
+    const r = await fetch(tileUrl);
+    if (!r.ok) return res.status(r.status).send("Tile fetch error");
+    res.set("Content-Type", "image/png");
+    res.set("Cache-Control", "public, max-age=86400"); // cache 1 day
+    r.body.pipe(res);
+  } catch (err) {
+    console.error("Tile proxy error:", err);
+    res.status(500).send("Tile proxy error");
+  }
 });
