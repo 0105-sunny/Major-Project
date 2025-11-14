@@ -46,17 +46,12 @@ app.use(methodOverride("_method")); //Middleware to override the mathod
 const dbUrl = process.env.ATLASDB_URL;
 
 async function main() {
-   try{
    await mongoose.connect(dbUrl, {
     useNewUrlParser: true,
       useUnifiedTopology: true,
       tls: true,
       serverSelectionTimeoutMS: 15000
     });
-    console.log(" MongoDB Atlas connection successful!");
-  } catch (err) {
-    console.error(" MongoDB connection failed:", err);
-  }
 }
 
 main()
